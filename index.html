@@ -1,0 +1,2169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OOP Preparation Portal – Sir Bilal (CS Department)</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=IBM+Plex+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --surface: #12121a;
+            --card: #18181f;
+            --border: #2a2a38;
+            --accent: #7c5cfc;
+            --accent2: #fc5c7d;
+            --accent3: #5cf9c4;
+            --text: #e8e8f0;
+            --muted: #7a7a9a;
+            --mark-bg: #1e1a35;
+            --code-bg: #0d0d17;
+            --yellow: #ffd166;
+            --correct: #5cf9c4;
+            --wrong: #fc5c7d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 15px;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        /* ───── HEADER ───── */
+        header {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 16px 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .logo span {
+            font-weight: 300;
+            font-size: 13px;
+            -webkit-text-fill-color: var(--muted);
+            color: var(--muted);
+            display: block;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        nav {
+            display: flex;
+            gap: 6px;
+        }
+
+        nav button {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--muted);
+            padding: 7px 16px;
+            border-radius: 6px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        nav button:hover,
+        nav button.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #fff;
+        }
+
+        /* ───── HERO ───── */
+        .hero {
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            padding: 60px 32px 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 60% 60% at 50% -10%, rgba(124, 92, 252, 0.18) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--mark-bg);
+            border: 1px solid var(--accent);
+            border-radius: 20px;
+            padding: 4px 14px;
+            font-size: 12px;
+            color: var(--accent);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(32px, 5vw, 58px);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 14px;
+            letter-spacing: -1px;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        .hero p {
+            color: var(--muted);
+            font-size: 15px;
+            max-width: 520px;
+            margin: 0 auto 30px;
+        }
+
+        .meta-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .pill {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 5px 14px;
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .pill strong {
+            color: var(--text);
+        }
+
+        /* ───── LAYOUT ───── */
+        .wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 32px;
+        }
+
+        /* ───── TABS ───── */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* ───── SECTION LABEL ───── */
+        .section-label {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 28px;
+            margin-top: 44px;
+        }
+
+        .section-label:first-child {
+            margin-top: 0;
+        }
+
+        .section-label .num {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        .section-label h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .section-label .marks {
+            margin-left: auto;
+            background: var(--mark-bg);
+            border: 1px solid var(--accent);
+            border-radius: 6px;
+            padding: 4px 12px;
+            font-size: 12px;
+            color: var(--accent);
+            font-family: 'IBM Plex Mono', monospace;
+            white-space: nowrap;
+        }
+
+        /* ───── QUESTION CARD ───── */
+        .q-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px 28px;
+            margin-bottom: 18px;
+            transition: border-color 0.2s;
+        }
+
+        .q-card:hover {
+            border-color: #3a3a52;
+        }
+
+        .q-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            margin-bottom: 14px;
+        }
+
+        .q-num {
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+            background: var(--mark-bg);
+            border: 1px solid var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--accent);
+            font-family: 'IBM Plex Mono', monospace;
+            flex-shrink: 0;
+        }
+
+        .q-meta {
+            flex: 1;
+        }
+
+        .q-topic {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent3);
+            margin-bottom: 4px;
+        }
+
+        .q-text {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        .q-marks {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            color: var(--yellow);
+            background: rgba(255, 209, 102, 0.1);
+            border: 1px solid rgba(255, 209, 102, 0.2);
+            border-radius: 5px;
+            padding: 3px 8px;
+            white-space: nowrap;
+        }
+
+        /* ───── CODE BLOCK ───── */
+        pre {
+            background: var(--code-bg);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--accent);
+            border-radius: 8px;
+            padding: 20px 22px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 13px;
+            line-height: 1.65;
+            overflow-x: auto;
+            margin: 14px 0;
+            color: #c9d1d9;
+        }
+
+        .kw {
+            color: #c792ea;
+        }
+
+        .cl {
+            color: #82aaff;
+        }
+
+        .fn {
+            color: #82aaff;
+        }
+
+        .st {
+            color: #c3e88d;
+        }
+
+        .cm {
+            color: #546e7a;
+        }
+
+        .nm {
+            color: #f78c6c;
+        }
+
+        .op {
+            color: #89ddff;
+        }
+
+        /* ───── MCQ ───── */
+        .mcq-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-top: 14px;
+        }
+
+        .mcq-opt {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: var(--muted);
+        }
+
+        .mcq-opt:hover {
+            border-color: var(--accent);
+            color: var(--text);
+            background: var(--mark-bg);
+        }
+
+        .mcq-opt.selected {
+            border-color: var(--accent);
+            background: var(--mark-bg);
+            color: var(--text);
+        }
+
+        .mcq-opt.correct {
+            border-color: var(--correct);
+            background: rgba(92, 249, 196, 0.08);
+            color: var(--correct);
+        }
+
+        .mcq-opt.wrong {
+            border-color: var(--wrong);
+            background: rgba(252, 92, 125, 0.08);
+            color: var(--wrong);
+        }
+
+        .opt-letter {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .mcq-opt.correct .opt-letter {
+            background: var(--correct);
+            color: #000;
+            border-color: var(--correct);
+        }
+
+        .mcq-opt.wrong .opt-letter {
+            background: var(--wrong);
+            color: #fff;
+            border-color: var(--wrong);
+        }
+
+        /* ───── ANSWER BOX ───── */
+        .answer-toggle {
+            background: transparent;
+            border: 1px dashed var(--border);
+            border-radius: 8px;
+            padding: 10px 16px;
+            color: var(--muted);
+            font-size: 13px;
+            cursor: pointer;
+            width: 100%;
+            text-align: left;
+            margin-top: 14px;
+            transition: all 0.2s;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .answer-toggle:hover {
+            border-color: var(--accent3);
+            color: var(--accent3);
+        }
+
+        .answer-box {
+            display: none;
+            margin-top: 12px;
+            background: rgba(92, 249, 196, 0.05);
+            border: 1px solid rgba(92, 249, 196, 0.2);
+            border-radius: 8px;
+            padding: 18px 22px;
+        }
+
+        .answer-box.visible {
+            display: block;
+        }
+
+        .answer-box h4 {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent3);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .answer-box p,
+        .answer-box li {
+            font-size: 14px;
+            color: var(--text);
+            opacity: 0.85;
+            line-height: 1.65;
+        }
+
+        .answer-box ul {
+            padding-left: 18px;
+        }
+
+        .answer-box li {
+            margin-bottom: 4px;
+        }
+
+        /* ───── OUTPUT BOX ───── */
+        .output-expected {
+            display: none;
+            margin-top: 12px;
+            background: rgba(252, 92, 125, 0.05);
+            border: 1px solid rgba(252, 92, 125, 0.2);
+            border-radius: 8px;
+            padding: 18px 22px;
+        }
+
+        .output-expected.visible {
+            display: block;
+        }
+
+        .output-expected h4 {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent2);
+            margin-bottom: 10px;
+        }
+
+        .output-expected pre {
+            background: transparent;
+            border: none;
+            border-left: none;
+            padding: 0;
+            margin: 0;
+            color: var(--accent3);
+            font-size: 14px;
+        }
+
+        /* ───── SCORE ───── */
+        .score-bar {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .score-val {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--accent3);
+        }
+
+        .score-label {
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .progress-track {
+            flex: 1;
+            height: 6px;
+            background: var(--border);
+            border-radius: 99px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: 99px;
+            background: linear-gradient(90deg, var(--accent), var(--accent3));
+            transition: width 0.4s ease;
+            width: 0%;
+        }
+
+        .check-btn {
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 22px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .check-btn:hover {
+            opacity: 0.85;
+        }
+
+        /* ───── DIVIDER ───── */
+        .divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 36px 0;
+        }
+
+        /* ───── INSTRUCTIONS ───── */
+        .instructions {
+            background: var(--mark-bg);
+            border: 1px solid var(--accent);
+            border-radius: 10px;
+            padding: 20px 24px;
+            margin-bottom: 32px;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .instructions h3 {
+            color: var(--accent);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .instructions ul {
+            padding-left: 18px;
+        }
+
+        .instructions li {
+            margin-bottom: 4px;
+        }
+
+        .instructions strong {
+            color: var(--text);
+        }
+
+        /* ───── FOOTER ───── */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 24px 32px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 600px) {
+            .mcq-options {
+                grid-template-columns: 1fr;
+            }
+
+            .header-inner {
+                flex-direction: column;
+                gap: 14px;
+            }
+
+            .wrapper {
+                padding: 24px 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="header-inner">
+            <div class="logo">
+                OOP<em style="font-style:normal; -webkit-text-fill-color: var(--text); color: var(--text);"> Prep</em>
+                <span>Sir Bilal · Computer Science Department</span>
+            </div>
+            <nav>
+                <button class="active" onclick="switchTab('long')">Long Qs</button>
+                <button onclick="switchTab('theory')">Theory</button>
+                <button onclick="switchTab('output')">Output</button>
+                <button onclick="switchTab('mcq')">MCQs</button>
+            </nav>
+        </div>
+    </header>
+
+    <div class="hero">
+        <div class="hero-badge">📚 Preparation Portal</div>
+        <h1>Object-Oriented<br><em>Mastery</em> Guide</h1>
+        <p>Your comprehensive resource for mastering OOP concepts. <strong>Best wishes for your exam preparations!</strong> Prepared by Sir Bilal for the Computer Science Department.</p>
+        <div class="meta-pills">
+            <div class="pill"><strong>10</strong> Long Questions</div>
+            <div class="pill"><strong>5</strong> Theory Questions</div>
+            <div class="pill"><strong>5</strong> Output Questions</div>
+            <div class="pill"><strong>25</strong> MCQs</div>
+            <div class="pill">Best wishes for <strong>OOP Students</strong></div>
+        </div>
+    </div>
+
+    <div class="wrapper">
+
+        <!-- ══════════════════════════════════ LONG QUESTIONS TAB ══════════════════════════════════ -->
+        <div id="tab-long" class="tab-content active">
+
+            <div class="instructions">
+                <h3>📚 Study Guide</h3>
+                <ul>
+                    <li>Attempt <strong>all 10 programming questions</strong>. Each carries <strong>15 Points</strong>.
+                    </li>
+                    <li>Write clean, well-commented C++ / Java code.</li>
+                    <li>Clearly define class structure, constructors, and methods.</li>
+                    <li>Show output where required.</li>
+                </ul>
+            </div>
+
+            <!-- Q1 -->
+            <div class="section-label">
+                <div class="num">Q1</div>
+                <h2>Class & Object</h2>
+                <div class="marks">Practice Points</div>
+            </div>
+            <div class="q-card">
+                <div class="q-header">
+                    <div class="q-num">01</div>
+                    <div class="q-meta">
+                        <div class="q-topic">Class · Object · Constructor</div>
+                        <div class="q-text">Design a class <code>BankAccount</code> with attributes
+                            <code>accountNumber</code>, <code>holderName</code>, and <code>balance</code>. Implement a
+                            parameterized constructor, a <code>deposit()</code> method, a <code>withdraw()</code> method
+                            (with insufficient-funds check), and a <code>display()</code> method. Create two objects and
+                            demonstrate all operations.</div>
+                    </div>
+                    <div class="q-marks">15 pts</div>
+                </div>
+                <pre><span class="cm">// Starter skeleton – complete the implementation</span>
+<span class="kw">class</span> <span class="cl">BankAccount</span> {
+<span class="kw">private</span>:
+    <span class="kw">int</span>    accountNumber;
+    <span class="st">string</span> holderName;
+    <span class="kw">double</span> balance;
+<span class="kw">public</span>:
+    <span class="cm">// 1. Parameterized constructor</span>
+    <span class="fn">BankAccount</span>(<span class="kw">int</span> accNo, <span class="st">string</span> name, <span class="kw">double</span> bal) { <span class="cm">/* ... */</span> }
+
+    <span class="cm">// 2. deposit(amount)</span>
+    <span class="kw">void</span> <span class="fn">deposit</span>(<span class="kw">double</span> amount) { <span class="cm">/* ... */</span> }
+
+    <span class="cm">// 3. withdraw(amount) – check insufficient funds</span>
+    <span class="kw">void</span> <span class="fn">withdraw</span>(<span class="kw">double</span> amount) { <span class="cm">/* ... */</span> }
+
+    <span class="cm">// 4. display account info</span>
+    <span class="kw">void</span> <span class="fn">display</span>() { <span class="cm">/* ... */</span> }
+};</pre>
+                <button class="answer-toggle" onclick="toggleAnswer(this)">▶ Show Model Answer</button>
+                <div class="answer-box">
+                    <h4>Model Answer</h4>
+                    <pre><span class="kw">#include</span><span class="st">&lt;iostream&gt;</span>
+<span class="kw">#include</span><span class="st">&lt;string&gt;</span>
+<span class="kw">using namespace</span> std;
+
+<span class="kw">class</span> <span class="cl">BankAccount</span> {
+<span class="kw">private</span>:
+    <span class="kw">int</span>    accountNumber;
+    <span class="st">string</span> holderName;
+    <span class="kw">double</span> balance;
+<span class="kw">public</span>:
+    <span class="fn">BankAccount</span>(<span class="kw">int</span> a, <span class="st">string</span> n, <span class="kw">double</span> b)
+        : accountNumber(a), holderName(n), balance(b) {}
+
+    <span class="kw">void</span> <span class="fn">deposit</span>(<span class="kw">double</span> amt) {
+        <span class="kw">if</span>(amt &gt; <span class="nm">0</span>) balance += amt;
+    }
+
+    <span class="kw">void</span> <span class="fn">withdraw</span>(<span class="kw">double</span> amt) {
+        <span class="kw">if</span>(amt &gt; balance) cout &lt;&lt; <span class="st">"Insufficient funds!\n"</span>;
+        <span class="kw">else</span> balance -= amt;
+    }
+
+    <span class="kw">void</span> <span class="fn">display</span>() {
+        cout &lt;&lt; <span class="st">"Acc: "</span> &lt;&lt; accountNumber &lt;&lt; <span class="st">" | Name: "</span>
+             &lt;&lt; holderName &lt;&lt; <span class="st">" | Balance: "</span> &lt;&lt; balance &lt;&lt; endl;
+    }
+};
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="cl">BankAccount</span> a1(<span class="nm">1001</span>, <span class="st">"Ali"</span>, <span class="nm">5000.0</span>);
+    <span class="cl">BankAccount</span> a2(<span class="nm">1002</span>, <span class="st">"Sara"</span>, <span class="nm">3000.0</span>);
+    a1.<span class="fn">deposit</span>(<span class="nm">2000</span>); a1.<span class="fn">display</span>();
+    a2.<span class="fn">withdraw</span>(<span class="nm">5000</span>); <span class="cm">// triggers insufficient funds</span>
+    <span class="kw">return</span> <span class="nm">0</span>;
+}</pre>
+                </div>
+            </div>
+
+            <!-- Q2 -->
+            <div class="section-label">
+                <div class="num">Q2</div>
+                <h2>Inheritance</h2>
+                <div class="marks">Practice Points</div>
+            </div>
+            <div class="q-card">
+                <div class="q-header">
+                    <div class="q-num">02</div>
+                    <div class="q-meta">
+                        <div class="q-topic">Inheritance · Base & Derived Class</div>
+                        <div class="q-text">Create a base class <code>Animal</code> with attributes <code>name</code>
+                            and <code>sound</code>, and a method <code>speak()</code>. Derive classes <code>Dog</code>
+                            and <code>Cat</code> from it, each overriding <code>speak()</code> with a unique message.
+                            Demonstrate polymorphism using base class pointers.</div>
+                    </div>
+                    <div class="q-marks">15 pts</div>
+                </div>
+                <pre><span class="kw">class</span> <span class="cl">Animal</span> {
+<span class="kw">protected</span>:
+    <span class="st">string</span> name;
+<span class="kw">public</span>:
+    <span class="fn">Animal</span>(<span class="st">string</span> n) : name(n) {}
+    <span class="kw">virtual void</span> <span class="fn">speak</span>() = <span class="nm">0</span>; <span class="cm">// pure virtual</span>
+};
+
+<span class="kw">class</span> <span class="cl">Dog</span> : <span class="kw">public</span> <span class="cl">Animal</span> { <span class="cm">/* override speak() */</span> };
+<span class="kw">class</span> <span class="cl">Cat</span> : <span class="kw">public</span> <span class="cl">Animal</span> { <span class="cm">/* override speak() */</span> };</pre>
+                <button class="answer-toggle" onclick="toggleAnswer(this)">▶ Show Model Answer</button>
+                <div class="answer-box">
+                    <h4>Model Answer</h4>
+                    <pre><span class="kw">class</span> <span class="cl">Animal</span> {
+<span class="kw">protected</span>: <span class="st">string</span> name;
+<span class="kw">public</span>:
+    <span class="fn">Animal</span>(<span class="st">string</span> n) : name(n) {}
+    <span class="kw">virtual void</span> <span class="fn">speak</span>() = <span class="nm">0</span>;
+};
+
+<span class="kw">class</span> <span class="cl">Dog</span> : <span class="kw">public</span> <span class="cl">Animal</span> {
+<span class="kw">public</span>:
+    <span class="fn">Dog</span>(<span class="st">string</span> n) : <span class="fn">Animal</span>(n) {}
+    <span class="kw">void</span> <span class="fn">speak</span>() <span class="kw">override</span> {
+        cout &lt;&lt; name &lt;&lt; <span class="st">" says: Woof!\n"</span>;
+    }
+};
+
+<span class="kw">class</span> <span class="cl">Cat</span> : <span class="kw">public</span> <span class="cl">Animal</span> {
+<span class="kw">public</span>:
+    <span class="fn">Cat</span>(<span class="st">string</span> n) : <span class="fn">Animal</span>(n) {}
+    <span class="kw">void</span> <span class="fn">speak</span>() <span class="kw">override</span> {
+        cout &lt;&lt; name &lt;&lt; <span class="st">" says: Meow!\n"</span>;
+    }
+};
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="cl">Animal</span>* pets[<span class="nm">2</span>];
+    pets[<span class="nm">0</span>] = <span class="kw">new</span> <span class="cl">Dog</span>(<span class="st">"Bruno"</span>);
+    pets[<span class="nm">1</span>] = <span class="kw">new</span> <span class="cl">Cat</span>(<span class="st">"Luna"</span>);
+    <span class="kw">for</span>(<span class="kw">auto</span> p : pets) p-&gt;<span class="fn">speak</span>();
+}</pre>
+                </div>
+            </div>
+
+            <!-- Q3 -->
+            <div class="section-label">
+                <div class="num">Q3</div>
+                <h2>Encapsulation</h2>
+                <div class="marks">Practice Points</div>
+            </div>
+            <div class="q-card">
+                <div class="q-header">
+                    <div class="q-num">03</div>
+                    <div class="q-meta">
+                        <div class="q-topic">Encapsulation · Getters & Setters</div>
+                        <div class="q-text">Design a class <code>Student</code> that encapsulates <code>rollNo</code>,
+                            <code>name</code>, and <code>marks</code> (0–100). Use private attributes with public
+                            getters/setters. The setter for marks must validate the range. Include a
+                            <code>getGrade()</code> method that returns A/B/C/D/F based on marks.</div>
+                    </div>
+                    <div class="q-marks">15 pts</div>
+                </div>
+                <button class="answer-toggle" onclick="toggleAnswer(this)">▶ Show Model Answer</button>
+                <div class="answer-box">
+                    <h4>Model Answer</h4>
+                    <pre><span class="kw">class</span> <span class="cl">Student</span> {
+<span class="kw">private</span>:
+    <span class="kw">int</span>    rollNo;
+    <span class="st">string</span> name;
+    <span class="kw">int</span>    marks;
+<span class="kw">public</span>:
+    <span class="fn">Student</span>(<span class="kw">int</span> r, <span class="st">string</span> n, <span class="kw">int</span> m)
+        : rollNo(r), name(n) { <span class="fn">setMarks</span>(m); }
+
+    <span class="kw">void</span> <span class="fn">setMarks</span>(<span class="kw">int</span> m) {
+        <span class="kw">if</span>(m &lt; <span class="nm">0</span> || m &gt; <span class="nm">100</span>) cout &lt;&lt; <span class="st">"Invalid marks!\n"</span>;
+        <span class="kw">else</span> marks = m;
+    }
+    <span class="kw">int</span>    <span class="fn">getMarks</span>() { <span class="kw">return</span> marks; }
+    <span class="st">string</span> <span class="fn">getName</span>()  { <span class="kw">return</span> name; }
+
+    <span class="st">string</span> <span class="fn">getGrade</span>() {
+        <span class="kw">if</span>(marks &gt;= <span class="nm">90</span>) <span class="kw">return</span> <span class="st">"A"</span>;
+        <span class="kw">if</span>(marks &gt;= <span class="nm">80</span>) <span class="kw">return</span> <span class="st">"B"</span>;
+        <span class="kw">if</span>(marks &gt;= <span class="nm">70</span>) <span class="kw">return</span> <span class="st">"C"</span>;
+        <span class="kw">if</span>(marks &gt;= <span class="nm">60</span>) <span class="kw">return</span> <span class="st">"D"</span>;
+        <span class="kw">return</span> <span class="st">"F"</span>;
+    }
+};</pre>
+                </div>
+            </div>
+
+            <!-- Q4 -->
+            <div class="section-label">
+                <div class="num">Q4</div>
+                <h2>Function Overloading</h2>
+                <div class="marks">Practice Points</div>
+            </div>
+            <div class="q-card">
+                <div class="q-header">
+                    <div class="q-num">04</div>
+                    <div class="q-meta">
+                        <div class="q-topic">Function Overloading · Polymorphism</div>
+                        <div class="q-text">Write a class <code>Calculator</code> that overloads the function
+                            <code>add()</code> to handle: (a) two integers, (b) two doubles, (c) three integers, and (d)
+                            two strings (concatenation). Demonstrate all four overloaded versions in
+                            <code>main()</code>.</div>
+                    </div>
+                    <div class="q-marks">15 pts</div>
+                </div>
+                <button class="answer-toggle" onclick="toggleAnswer(this)">▶ Show Model Answer</button>
+                <div class="answer-box">
+                    <h4>Model Answer</h4>
+                    <pre><span class="kw">class</span> <span class="cl">Calculator</span> {
+<span class="kw">public</span>:
+    <span class="kw">int</span>    <span class="fn">add</span>(<span class="kw">int</span> a, <span class="kw">int</span> b)            { <span class="kw">return</span> a + b; }
+    <span class="kw">double</span> <span class="fn">add</span>(<span class="kw">double</span> a, <span class="kw">double</span> b)    { <span class="kw">return</span> a + b; }
+    <span class="kw">int</span>    <span class="fn">add</span>(<span class="kw">int</span> a, <span class="kw">int</span> b, <span class="kw">int</span> c)    { <span class="kw">return</span> a + b + c; }
+    <span class="st">string</span> <span class="fn">add</span>(<span class="st">string</span> a, <span class="st">string</span> b)    { <span class="kw">return</span> a + b; }
+};
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="cl">Calculator</span> c;
+    cout &lt;&lt; c.<span class="fn">add</span>(<span class="nm">3</span>, <span class="nm">4</span>) &lt;&lt; endl;               <span class="cm">// 7</span>
+    cout &lt;&lt; c.<span class="fn">add</span>(<span class="nm">2.5</span>, <span class="nm">3.7</span>) &lt;&lt; endl;           <span class="cm">// 6.2</span>
+    cout &lt;&lt; c.<span class="fn">add</span>(<span class="nm">1</span>, <span class="nm">2</span>, <span class="nm">3</span>) &lt;&lt; endl;           <span class="cm">// 6</span>
+    cout &lt;&lt; c.<span class="fn">add</span>(<span class="st">"Hello, "</span>, <span class="st">"World"</span>) &lt;&lt; endl; <span class="cm">// Hello, World</span>
+}</pre>
+                </div>
+            </div>
+
+            <!-- Q5 -->
+            <div class="section-label">
+                <div class="num">Q5</div>
+                <h2>Constructor Types</h2>
+                <div class="marks">Practice Points</div>
+            </div>
+            <div class="q-card">
+                <div class="q-header">
+                    <div class="q-num">05</div>
+                    <div class="q-meta">
+                        <div class="q-topic">Default · Parameterized · Copy Constructor</div>
+                        <div class="q-text">Implement a class <code>Rectangle</code> with attributes <code>length</code>
+                            and <code>width</code>. Provide: (a) a default constructor initializing both to 1, (b) a
+                            parameterized constructor, (c) a copy constructor, and (d) methods <code>area()</code> and
+                            <code>perimeter()</code>. Demonstrate all three constructors.</div>
+                    </div>
+                    <div class="q-marks">15 pts</div>
+                </div>
+                <button class="answer-toggle" onclick="toggleAnswer(this)">▶ Show Model Answer</button>
+                <div class="answer-box">
+                    <h4>Model Answer</h4>
+                    <pre><span class="kw">class</span> <span class="cl">Rectangle</span> {
+<span class="kw">private</span>:
+    <span class="kw">double</span> length, width;
+<span class="kw">public</span>:
+    <span class="fn">Rectangle</span>() : length(<span class="nm">1</span>), width(<span class="nm">1</span>) {}
+    <span class="fn">Rectangle</span>(<span class="kw">double</span> l, <span class="kw">double</span> w) : length(l), width(w) {}
+    <span class="fn">Rectangle</span>(<span class="kw">const</span> <span class="cl">Rectangle</span>&amp; r) : length(r.length), width(r.width) {}
+
+    <span class="kw">double</span> <span class="fn">area</span>()      { <span class="kw">return</span> length * width; }
+    <span class="kw">double</span> <span class="fn">perimeter</span>() { <span class="kw">return</span> <span class="nm">2</span> * (length + width); }
+};</pre>
+                </div>
+            </div>
+
+            <!-- Q6 -->
+            <div class="section-label">
+                <div class="num">Q6</div>
+                <h2>Multilevel Inheritance</h2>
+                <div class="marks">Practice Points</div>
+            </div>
+            <div class="q-card">
+                <div class="q-header">
+                    <div class="q-num">06</div>
+                    <div class="q-meta">
+                        <div class="q-topic">Multilevel Inheritance</div>
+                        <div class="q-text">Create a multilevel inheritance hierarchy: <code>Person</code> →
+                            <code>Employee</code> → <code>Manager</code>. <code>Person</code> has name &amp; age.
+                            <code>Employee</code> adds employeeId &amp; salary. <code>Manager</code> adds department
+                            &amp; teamSize. Each class should have a <code>display()</code> method that calls the
+                            parent's display first (using scope resolution).</div>
+                    </div>
+                    <div class="q-marks">15 pts</div>
+                </div>
+                <button class="answer-toggle" onclick="toggleAnswer(this)">▶ Show Model Answer</button>
+                <div class="answer-box">
+                    <h4>Model Answer</h4>
+                    <pre><span class="kw">class</span> <span class="cl">Person</span> {
+<span class="kw">protected</span>: <span class="st">string</span> name; <span class="kw">int</span> age;
+<span class="kw">public</span>:
+    <span class="fn">Person</span>(<span class="st">string</span> n, <span class="kw">int</span> a): name(n), age(a){}
+    <span class="kw">void</span> <span class="fn">display</span>(){ cout &lt;&lt; <span class="st">"Name:"</span> &lt;&lt; name &lt;&lt; <span class="st">" Age:"</span> &lt;&lt; age &lt;&lt; <span class="st">"\n"</span>; }
+};
+
+<span class="kw">class</span> <span class="cl">Employee</span> : <span class="kw">public</span> <span class="cl">Person</span> {
+<span class="kw">protected</span>: <span class="kw">int</span> empId; <span class="kw">double</span> salary;
+<span class="kw">public</span>:
+    <span class="fn">Employee</span>(<span class="st">string</span> n, <span class="kw">int</span> a, <span class="kw">int</span> id, <span class="kw">double</span> s)
+        : <span class="fn">Person</span>(n,a), empId(id), salary(s){}
+    <span class="kw">void</span> <span class="fn">display</span>(){
+        <span class="cl">Person</span>::<span class="fn">display</span>();
+        cout &lt;&lt; <span class="st">"EmpID:"</span> &lt;&lt; empId &lt;&lt; <span class="st">" Salary:"</span> &lt;&lt; salary &lt;&lt; <span class="st">"\n"</span>;
+    }
+};
+
+<span class="kw">class</span> <span class="cl">Manager</span> : <span class="kw">public</span> <span class="cl">Employee</span> {
+    <span class="st">string</span> dept; <span class="kw">int</span> teamSize;
+<span class="kw">public</span>:
+    <span class="fn">Manager</span>(<span class="st">string</span> n,<span class="kw">int</span> a,<span class="kw">int</span> id,<span class="kw">double</span> s,<span class="st">string</span> d,<span class="kw">int</span> t)
+        : <span class="fn">Employee</span>(n,a,id,s), dept(d), teamSize(t){}
+    <span class="kw">void</span> <span class="fn">display</span>(){
+        <span class="cl">Employee</span>::<span class="fn">display</span>();
+        cout &lt;&lt; <span class="st">"Dept:"</span> &lt;&lt; dept &lt;&lt; <span class="st">" Team:"</span> &lt;&lt; teamSize &lt;&lt; <span class="st">"\n"</span>;
+    }
+};</pre>
+                </div>
+            </div>
+
+            <!-- Q7 -->
+            <div class="section-label">
+                <div class="num">Q7</div>
+                <h2>Encapsulation + Inheritance</h2>
+                <div class="marks">Practice Points</div>
+            </div>
+            <div class="q-card">
+                <div class="q-header">
+                    <div class="q-num">07</div>
+                    <div class="q-meta">
+                        <div class="q-topic">Encapsulation · Inheritance · Access Specifiers</div>
+                        <div class="q-text">Create a base class <code>Shape</code> with a protected attribute
+                            <code>color</code> and a pure virtual method <code>area()</code>. Derive <code>Circle</code>
+                            (radius) and <code>Triangle</code> (base, height) from it. Encapsulate all data members with
+                            proper getters/setters. Demonstrate dynamic dispatch through a base pointer array.</div>
+                    </div>
+                    <div class="q-marks">15 pts</div>
+                </div>
+                <button class="answer-toggle" onclick="toggleAnswer(this)">▶ Show Model Answer</button>
+                <div class="answer-box">
+                    <h4>Model Answer</h4>
+                    <pre><span class="kw">class</span> <span class="cl">Shape</span> {
+<span class="kw">protected</span>: <span class="st">string</span> color;
+<span class="kw">public</span>:
+    <span class="fn">Shape</span>(<span class="st">string</span> c): color(c){}
+    <span class="kw">virtual double</span> <span class="fn">area</span>() = <span class="nm">0</span>;
+    <span class="st">string</span> <span class="fn">getColor</span>(){ <span class="kw">return</span> color; }
+};
+
+<span class="kw">class</span> <span class="cl">Circle</span> : <span class="kw">public</span> <span class="cl">Shape</span> {
+    <span class="kw">double</span> radius;
+<span class="kw">public</span>:
+    <span class="fn">Circle</span>(<span class="st">string</span> c, <span class="kw">double</span> r): <span class="fn">Shape</span>(c), radius(r){}
+    <span class="kw">double</span> <span class="fn">area</span>(){ <span class="kw">return</span> <span class="nm">3.14159</span> * radius * radius; }
+};
+
+<span class="kw">class</span> <span class="cl">Triangle</span> : <span class="kw">public</span> <span class="cl">Shape</span> {
+    <span class="kw">double</span> base, height;
+<span class="kw">public</span>:
+    <span class="fn">Triangle</span>(<span class="st">string</span> c, <span class="kw">double</span> b, <span class="kw">double</span> h)
+        : <span class="fn">Shape</span>(c), base(b), height(h){}
+    <span class="kw">double</span> <span class="fn">area</span>(){ <span class="kw">return</span> <span class="nm">0.5</span> * base * height; }
+};</pre>
+                </div>
+            </div>
+
+            <!-- Q8 -->
+            <div class="section-label">
+                <div class="num">Q8</div>
+                <h2>Benefits of OOP – Implementation</h2>
+                <div class="marks">Practice Points</div>
+            </div>
+            <div class="q-card">
+                <div class="q-header">
+                    <div class="q-num">08</div>
+                    <div class="q-meta">
+                        <div class="q-topic">OOP Benefits · Real-world modelling</div>
+                        <div class="q-text">Build a mini Library Management System demonstrating OOP benefits: class
+                            <code>Book</code> (encapsulation), class <code>EBook</code> extending <code>Book</code>
+                            (inheritance + reusability), a method <code>displayInfo()</code> overridden in
+                            <code>EBook</code> (polymorphism). Show how adding a new book type requires minimal code
+                            change (extensibility).</div>
+                    </div>
+                    <div class="q-marks">15 pts</div>
+                </div>
+                <button class="answer-toggle" onclick="toggleAnswer(this)">▶ Show Model Answer</button>
+                <div class="answer-box">
+                    <h4>Model Answer</h4>
+                    <pre><span class="kw">class</span> <span class="cl">Book</span> {
+<span class="kw">protected</span>:
+    <span class="st">string</span> title, author;
+    <span class="kw">int</span> pages;
+<span class="kw">public</span>:
+    <span class="fn">Book</span>(<span class="st">string</span> t, <span class="st">string</span> a, <span class="kw">int</span> p): title(t),author(a),pages(p){}
+    <span class="kw">virtual void</span> <span class="fn">displayInfo</span>(){
+        cout &lt;&lt; <span class="st">"[Book] "</span> &lt;&lt; title &lt;&lt; <span class="st">" by "</span> &lt;&lt; author
+             &lt;&lt; <span class="st">" | Pages: "</span> &lt;&lt; pages &lt;&lt; <span class="st">"\n"</span>;
+    }
+};
+
+<span class="kw">class</span> <span class="cl">EBook</span> : <span class="kw">public</span> <span class="cl">Book</span> {
+    <span class="kw">double</span> fileSizeMB;
+<span class="kw">public</span>:
+    <span class="fn">EBook</span>(<span class="st">string</span> t, <span class="st">string</span> a, <span class="kw">int</span> p, <span class="kw">double</span> f)
+        : <span class="fn">Book</span>(t,a,p), fileSizeMB(f){}
+    <span class="kw">void</span> <span class="fn">displayInfo</span>() <span class="kw">override</span> {
+        <span class="cl">Book</span>::<span class="fn">displayInfo</span>();
+        cout &lt;&lt; <span class="st">"  File: "</span> &lt;&lt; fileSizeMB &lt;&lt; <span class="st">" MB\n"</span>;
+    }
+};</pre>
+                </div>
+            </div>
+
+            <!-- Q9 -->
+            <div class="section-label">
+                <div class="num">Q9</div>
+                <h2>Disadvantages of OOP – Demo</h2>
+                <div class="marks">Practice Points</div>
+            </div>
+            <div class="q-card">
+                <div class="q-header">
+                    <div class="q-num">09</div>
+                    <div class="q-meta">
+                        <div class="q-topic">OOP Limitations · Design Tradeoffs</div>
+                        <div class="q-text">Write a program that illustrates a common disadvantage of OOP — tight
+                            coupling through deep inheritance. Create 4 levels of inheritance: <code>Vehicle</code> →
+                            <code>Car</code> → <code>ElectricCar</code> → <code>TeslaModel3</code>. Show how a change in
+                            the base class <code>Vehicle</code> (e.g., adding a required method) forces changes across
+                            all derived classes. Comment your code to explain the problem.</div>
+                    </div>
+                    <div class="q-marks">15 pts</div>
+                </div>
+                <button class="answer-toggle" onclick="toggleAnswer(this)">▶ Show Model Answer</button>
+                <div class="answer-box">
+                    <h4>Model Answer + Explanation</h4>
+                    <pre><span class="cm">// Deep inheritance → tight coupling</span>
+<span class="kw">class</span> <span class="cl">Vehicle</span> {
+<span class="kw">public</span>:
+    <span class="kw">virtual void</span> <span class="fn">fuelType</span>() = <span class="nm">0</span>; <span class="cm">// adding this forces ALL derived to implement</span>
+    <span class="kw">virtual void</span> <span class="fn">move</span>() { cout &lt;&lt; <span class="st">"Moving\n"</span>; }
+};
+
+<span class="kw">class</span> <span class="cl">Car</span> : <span class="kw">public</span> <span class="cl">Vehicle</span> {
+<span class="kw">public</span>:
+    <span class="kw">void</span> <span class="fn">fuelType</span>() { cout &lt;&lt; <span class="st">"Petrol\n"</span>; }
+};
+
+<span class="kw">class</span> <span class="cl">ElectricCar</span> : <span class="kw">public</span> <span class="cl">Car</span> {
+<span class="kw">public</span>:
+    <span class="kw">void</span> <span class="fn">fuelType</span>() { cout &lt;&lt; <span class="st">"Electric\n"</span>; } <span class="cm">// must override</span>
+};
+
+<span class="kw">class</span> <span class="cl">TeslaModel3</span> : <span class="kw">public</span> <span class="cl">ElectricCar</span> {
+<span class="kw">public</span>:
+    <span class="kw">void</span> <span class="fn">fuelType</span>() { cout &lt;&lt; <span class="st">"Battery 100kWh\n"</span>; }
+};
+<span class="cm">// Disadvantage: Every level must implement fuelType()
+// → brittle design, high maintenance cost</span></pre>
+                </div>
+            </div>
+
+            <!-- Q10 -->
+            <div class="section-label">
+                <div class="num">Q10</div>
+                <h2>Complete OOP System</h2>
+                <div class="marks">Practice Points</div>
+            </div>
+            <div class="q-card">
+                <div class="q-header">
+                    <div class="q-num">10</div>
+                    <div class="q-meta">
+                        <div class="q-topic">All Concepts Combined</div>
+                        <div class="q-text">Build a <strong>University System</strong> with: (a) base class
+                            <code>Person</code> (encapsulation), (b) derived classes <code>Student</code> and
+                            <code>Teacher</code> (inheritance), (c) overloaded constructor in each, (d) a pure virtual
+                            method <code>getRole()</code> (polymorphism), (e) an overloaded <code>+</code> operator in
+                            <code>Student</code> to merge two students' GPAs (function overloading). Demonstrate in
+                            <code>main()</code>.</div>
+                    </div>
+                    <div class="q-marks">15 pts</div>
+                </div>
+                <button class="answer-toggle" onclick="toggleAnswer(this)">▶ Show Model Answer</button>
+                <div class="answer-box">
+                    <h4>Model Answer</h4>
+                    <pre><span class="kw">class</span> <span class="cl">Person</span> {
+<span class="kw">protected</span>: <span class="st">string</span> name; <span class="kw">int</span> age;
+<span class="kw">public</span>:
+    <span class="fn">Person</span>(<span class="st">string</span> n, <span class="kw">int</span> a): name(n), age(a){}
+    <span class="kw">virtual</span> <span class="st">string</span> <span class="fn">getRole</span>() = <span class="nm">0</span>;
+};
+
+<span class="kw">class</span> <span class="cl">Student</span> : <span class="kw">public</span> <span class="cl">Person</span> {
+    <span class="kw">double</span> gpa;
+<span class="kw">public</span>:
+    <span class="fn">Student</span>(<span class="st">string</span> n, <span class="kw">int</span> a, <span class="kw">double</span> g): <span class="fn">Person</span>(n,a), gpa(g){}
+    <span class="st">string</span> <span class="fn">getRole</span>() { <span class="kw">return</span> <span class="st">"Student"</span>; }
+    <span class="cm">// operator overloading – average GPA</span>
+    <span class="cl">Student</span> <span class="kw">operator</span>+(<span class="kw">const</span> <span class="cl">Student</span>&amp; s){
+        <span class="kw">return</span> <span class="cl">Student</span>(name+<span class="st">"+"</span>+s.name, age, (gpa+s.gpa)/<span class="nm">2</span>);
+    }
+    <span class="kw">void</span> <span class="fn">show</span>(){ cout &lt;&lt; name &lt;&lt; <span class="st">" GPA:"</span> &lt;&lt; gpa &lt;&lt; <span class="st">"\n"</span>; }
+};
+
+<span class="kw">class</span> <span class="cl">Teacher</span> : <span class="kw">public</span> <span class="cl">Person</span> {
+    <span class="st">string</span> subject;
+<span class="kw">public</span>:
+    <span class="fn">Teacher</span>(<span class="st">string</span> n, <span class="kw">int</span> a, <span class="st">string</span> s): <span class="fn">Person</span>(n,a), subject(s){}
+    <span class="st">string</span> <span class="fn">getRole</span>() { <span class="kw">return</span> <span class="st">"Teacher of "</span> + subject; }
+};</pre>
+                </div>
+            </div>
+        </div><!-- /tab-long -->
+
+
+        <!-- ══════════════════════════════════ THEORY TAB ══════════════════════════════════ -->
+        <div id="tab-theory" class="tab-content">
+
+            <div class="instructions">
+                <h3>📚 Study Guide</h3>
+                <ul>
+                    <li>Answer all <strong>5 short theory questions</strong>. Each carries <strong>5 Points</strong>.
+                    </li>
+                    <li>Keep answers concise but complete. Use bullet points where appropriate.</li>
+                    <li>Total: <strong>25 marks</strong></li>
+                </ul>
+            </div>
+
+            <!-- T1 -->
+            <div class="section-label">
+                <div class="num" style="background: var(--accent2);">T1</div>
+                <h2>Class vs Object</h2>
+                <div class="marks">Theory Points</div>
+            </div>
+            <div class="q-card">
+                <div class="q-header">
+                    <div class="q-num">01</div>
+                    <div class="q-meta">
+                        <div class="q-topic">Class · Object · OOP Basics</div>
+                        <div class="q-text">Define a <strong>class</strong> and an <strong>object</strong> in OOP. What
+                            is the difference between them? Give a real-world analogy and a code-level example to
+                            support your answer.</div>
+                    </div>
+                    <div class="q-marks">5 pts</div>
+                </div>
+                <button class="answer-toggle" onclick="toggleAnswer(this)">▶ Show Model Answer</button>
+                <div class="answer-box">
+                    <h4>Model Answer</h4>
+                    <ul>
+                        <li><strong>Class:</strong> A blueprint or template that defines attributes (data) and methods
+                            (behavior) for a category of objects. It does not occupy memory by itself.</li>
+                        <li><strong>Object:</strong> A runtime instance of a class. It occupies memory and holds actual
+                            values.</li>
+                        <li><strong>Analogy:</strong> Class = "Car blueprint"; Object = "Your specific red Toyota
+                            Corolla".</li>
+                        <li><strong>Code:</strong> <code>class Car {…};</code> is the class; <code>Car myCar;</code> is
+                            the object.</li>
+                        <li>Multiple objects can be created from one class, each with different state.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- T2 -->
+            <div class="section-label">
+                <div class="num" style="background: var(--accent2);">T2</div>
+                <h2>Encapsulation</h2>
+                <div class="marks">Theory Points</div>
+            </div>
+            <div class="q-card">
+                <div class="q-header">
+                    <div class="q-num">02</div>
+                    <div class="q-meta">
+                        <div class="q-topic">Encapsulation · Data Hiding</div>
+                        <div class="q-text">What is encapsulation? Why is it considered one of the most important
+                            pillars of OOP? Explain <em>data hiding</em> and how access specifiers
+                            (<code>private</code>, <code>protected</code>, <code>public</code>) enforce it.</div>
+                    </div>
+                    <div class="q-marks">5 pts</div>
+                </div>
+                <button class="answer-toggle" onclick="toggleAnswer(this)">▶ Show Model Answer</button>
+                <div class="answer-box">
+                    <h4>Model Answer</h4>
+                    <ul>
+                        <li><strong>Encapsulation:</strong> Bundling data (attributes) and methods that operate on that
+                            data into a single unit (class), while restricting direct access from outside.</li>
+                        <li><strong>Data hiding:</strong> Making attributes <code>private</code> so they cannot be
+                            directly modified by outside code — changes only happen through controlled methods
+                            (getters/setters).</li>
+                        <li><code>private</code> → accessible only within the class.</li>
+                        <li><code>protected</code> → accessible within the class and its derived classes.</li>
+                        <li><code>public</code> → accessible from anywhere.</li>
+                        <li><strong>Benefit:</strong> Prevents invalid state, improves maintainability, hides
+                            implementation details.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- T3 -->
+            <div class="section-label">
+                <div class="num" style="background: var(--accent2);">T3</div>
+                <h2>Inheritance</h2>
+                <div class="marks">Theory Points</div>
+            </div>
+            <div class="q-card">
+                <div class="q-header">
+                    <div class="q-num">03</div>
+                    <div class="q-meta">
+                        <div class="q-topic">Inheritance · Types</div>
+                        <div class="q-text">Define inheritance and list its types (single, multiple, multilevel,
+                            hierarchical, hybrid). What is the difference between <em>method overriding</em> and
+                            <em>method overloading</em>? Why do we use the <code>virtual</code> keyword in C++?</div>
+                    </div>
+                    <div class="q-marks">5 pts</div>
+                </div>
+                <button class="answer-toggle" onclick="toggleAnswer(this)">▶ Show Model Answer</button>
+                <div class="answer-box">
+                    <h4>Model Answer</h4>
+                    <ul>
+                        <li><strong>Inheritance:</strong> A mechanism where a derived class acquires properties and
+                            behaviors of a base class, enabling code reuse.</li>
+                        <li><strong>Types:</strong> Single (A→B), Multiple (A+B→C), Multilevel (A→B→C), Hierarchical
+                            (A→B, A→C), Hybrid (combination).</li>
+                        <li><strong>Overriding:</strong> Same method signature in derived class replaces the base
+                            version (runtime polymorphism).</li>
+                        <li><strong>Overloading:</strong> Same method name but different parameters in the same class
+                            (compile-time).</li>
+                        <li><strong>virtual keyword:</strong> Tells the compiler to use the derived class's version of
+                            the method when called via a base pointer — enables dynamic dispatch.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- T4 -->
+            <div class="section-label">
+                <div class="num" style="background: var(--accent2);">T4</div>
+                <h2>Benefits of OOP</h2>
+                <div class="marks">Theory Points</div>
+            </div>
+            <div class="q-card">
+                <div class="q-header">
+                    <div class="q-num">04</div>
+                    <div class="q-meta">
+                        <div class="q-topic">OOP Advantages</div>
+                        <div class="q-text">List and explain <strong>any five benefits</strong> of Object-Oriented
+                            Programming compared to procedural programming. Provide a brief real-world scenario where
+                            each benefit is clearly visible.</div>
+                    </div>
+                    <div class="q-marks">5 pts</div>
+                </div>
+                <button class="answer-toggle" onclick="toggleAnswer(this)">▶ Show Model Answer</button>
+                <div class="answer-box">
+                    <h4>Model Answer</h4>
+                    <ul>
+                        <li><strong>Reusability:</strong> Inheritance allows reusing existing code. E.g.,
+                            <code>Employee</code> reuses all logic from <code>Person</code>.</li>
+                        <li><strong>Modularity:</strong> Each class is an independent module — easy to develop, test,
+                            and debug separately.</li>
+                        <li><strong>Maintainability:</strong> Encapsulation localizes changes. Fixing a bug inside a
+                            class doesn't affect code elsewhere.</li>
+                        <li><strong>Flexibility (Polymorphism):</strong> One interface, many implementations. Adding new
+                            types doesn't break existing code.</li>
+                        <li><strong>Real-world modelling:</strong> Objects map naturally to real entities (BankAccount,
+                            Car, Student), making design intuitive.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- T5 -->
+            <div class="section-label">
+                <div class="num" style="background: var(--accent2);">T5</div>
+                <h2>Disadvantages of OOP</h2>
+                <div class="marks">Theory Points</div>
+            </div>
+            <div class="q-card">
+                <div class="q-header">
+                    <div class="q-num">05</div>
+                    <div class="q-meta">
+                        <div class="q-topic">OOP Limitations</div>
+                        <div class="q-text">Mention and explain <strong>five disadvantages or limitations</strong> of
+                            OOP. When is procedural or functional programming a better choice than OOP?</div>
+                    </div>
+                    <div class="q-marks">5 pts</div>
+                </div>
+                <button class="answer-toggle" onclick="toggleAnswer(this)">▶ Show Model Answer</button>
+                <div class="answer-box">
+                    <h4>Model Answer</h4>
+                    <ul>
+                        <li><strong>Steeper learning curve:</strong> Concepts like polymorphism, virtual tables, and
+                            memory management are harder for beginners.</li>
+                        <li><strong>Overhead:</strong> Objects consume more memory; virtual function calls are slower
+                            than direct calls due to vtable lookup.</li>
+                        <li><strong>Not suitable for small tasks:</strong> Writing a class for a simple script is
+                            unnecessary complexity.</li>
+                        <li><strong>Tight coupling in deep inheritance:</strong> Changes in a base class can break all
+                            derived classes (Fragile Base Class problem).</li>
+                        <li><strong>Slower development start:</strong> Designing a good class hierarchy takes time
+                            upfront.</li>
+                        <li><strong>Better alternatives:</strong> For data pipelines and mathematics → functional; for
+                            system utilities/scripts → procedural.</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div><!-- /tab-theory -->
+
+
+        <!-- ══════════════════════════════════ OUTPUT TAB ══════════════════════════════════ -->
+        <div id="tab-output" class="tab-content">
+
+            <div class="instructions">
+                <h3>📚 Study Guide</h3>
+                <ul>
+                    <li>Read each program carefully and <strong>write the exact output</strong> it will produce.</li>
+                    <li>Each question carries <strong>5 marks</strong>. Total: <strong>25 Points</strong></li>
+                    <li>Watch for constructors, destructors, and virtual dispatch!</li>
+                </ul>
+            </div>
+
+            <!-- O1 -->
+            <div class="section-label">
+                <div class="num" style="background:#f78c6c;">O1</div>
+                <h2>Constructor Order</h2>
+                <div class="marks">Theory Points</div>
+            </div>
+            <div class="q-card">
+                <div class="q-header">
+                    <div class="q-num">01</div>
+                    <div class="q-meta">
+                        <div class="q-topic">Constructor · Destructor · Inheritance Order</div>
+                        <div class="q-text">What is the output of the following program?</div>
+                    </div>
+                    <div class="q-marks">5 pts</div>
+                </div>
+                <pre><span class="kw">#include</span><span class="st">&lt;iostream&gt;</span>
+<span class="kw">using namespace</span> std;
+<span class="kw">class</span> <span class="cl">A</span> {
+<span class="kw">public</span>:
+    <span class="fn">A</span>()  { cout &lt;&lt; <span class="st">"A Constructor\n"</span>; }
+    ~<span class="fn">A</span>() { cout &lt;&lt; <span class="st">"A Destructor\n"</span>; }
+};
+<span class="kw">class</span> <span class="cl">B</span> : <span class="kw">public</span> <span class="cl">A</span> {
+<span class="kw">public</span>:
+    <span class="fn">B</span>()  { cout &lt;&lt; <span class="st">"B Constructor\n"</span>; }
+    ~<span class="fn">B</span>() { cout &lt;&lt; <span class="st">"B Destructor\n"</span>; }
+};
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="cl">B</span> obj;
+    <span class="kw">return</span> <span class="nm">0</span>;
+}</pre>
+                <button class="answer-toggle" onclick="toggleOutput(this)">▶ Reveal Output</button>
+                <div class="output-expected">
+                    <h4>Expected Output</h4>
+                    <pre>A Constructor
+B Constructor
+B Destructor
+A Destructor</pre>
+                </div>
+            </div>
+
+            <!-- O2 -->
+            <div class="section-label">
+                <div class="num" style="background:#f78c6c;">O2</div>
+                <h2>Function Overloading</h2>
+                <div class="marks">Theory Points</div>
+            </div>
+            <div class="q-card">
+                <div class="q-header">
+                    <div class="q-num">02</div>
+                    <div class="q-meta">
+                        <div class="q-topic">Function Overloading · Return Types</div>
+                        <div class="q-text">What is the output of the following program?</div>
+                    </div>
+                    <div class="q-marks">5 pts</div>
+                </div>
+                <pre><span class="kw">#include</span><span class="st">&lt;iostream&gt;</span>
+<span class="kw">using namespace</span> std;
+<span class="kw">class</span> <span class="cl">Math</span> {
+<span class="kw">public</span>:
+    <span class="kw">int</span>    <span class="fn">square</span>(<span class="kw">int</span> x)    { <span class="kw">return</span> x * x; }
+    <span class="kw">double</span> <span class="fn">square</span>(<span class="kw">double</span> x){ <span class="kw">return</span> x * x; }
+};
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="cl">Math</span> m;
+    cout &lt;&lt; m.<span class="fn">square</span>(<span class="nm">4</span>)   &lt;&lt; endl;
+    cout &lt;&lt; m.<span class="fn">square</span>(<span class="nm">2.5</span>) &lt;&lt; endl;
+    cout &lt;&lt; m.<span class="fn">square</span>(<span class="nm">3</span>)   &lt;&lt; endl;
+}</pre>
+                <button class="answer-toggle" onclick="toggleOutput(this)">▶ Reveal Output</button>
+                <div class="output-expected">
+                    <h4>Expected Output</h4>
+                    <pre>16
+6.25
+9</pre>
+                </div>
+            </div>
+
+            <!-- O3 -->
+            <div class="section-label">
+                <div class="num" style="background:#f78c6c;">O3</div>
+                <h2>Virtual Dispatch</h2>
+                <div class="marks">Theory Points</div>
+            </div>
+            <div class="q-card">
+                <div class="q-header">
+                    <div class="q-num">03</div>
+                    <div class="q-meta">
+                        <div class="q-topic">Virtual Function · Polymorphism</div>
+                        <div class="q-text">What is the output of the following program?</div>
+                    </div>
+                    <div class="q-marks">5 pts</div>
+                </div>
+                <pre><span class="kw">#include</span><span class="st">&lt;iostream&gt;</span>
+<span class="kw">using namespace</span> std;
+<span class="kw">class</span> <span class="cl">Base</span> {
+<span class="kw">public</span>:
+    <span class="kw">virtual void</span> <span class="fn">show</span>(){ cout &lt;&lt; <span class="st">"Base\n"</span>; }
+};
+<span class="kw">class</span> <span class="cl">Derived</span> : <span class="kw">public</span> <span class="cl">Base</span> {
+<span class="kw">public</span>:
+    <span class="kw">void</span> <span class="fn">show</span>(){ cout &lt;&lt; <span class="st">"Derived\n"</span>; }
+};
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="cl">Base</span>* p;
+    <span class="cl">Derived</span> d;
+    p = &amp;d;
+    p-&gt;<span class="fn">show</span>();
+    <span class="cl">Base</span> b;
+    p = &amp;b;
+    p-&gt;<span class="fn">show</span>();
+}</pre>
+                <button class="answer-toggle" onclick="toggleOutput(this)">▶ Reveal Output</button>
+                <div class="output-expected">
+                    <h4>Expected Output</h4>
+                    <pre>Derived
+Base</pre>
+                </div>
+            </div>
+
+            <!-- O4 -->
+            <div class="section-label">
+                <div class="num" style="background:#f78c6c;">O4</div>
+                <h2>Encapsulation & Getters</h2>
+                <div class="marks">Theory Points</div>
+            </div>
+            <div class="q-card">
+                <div class="q-header">
+                    <div class="q-num">04</div>
+                    <div class="q-meta">
+                        <div class="q-topic">Encapsulation · Output Tracing</div>
+                        <div class="q-text">What is the output of the following program?</div>
+                    </div>
+                    <div class="q-marks">5 pts</div>
+                </div>
+                <pre><span class="kw">#include</span><span class="st">&lt;iostream&gt;</span>
+<span class="kw">using namespace</span> std;
+<span class="kw">class</span> <span class="cl">Counter</span> {
+    <span class="kw">int</span> count = <span class="nm">0</span>;
+<span class="kw">public</span>:
+    <span class="kw">void</span> <span class="fn">increment</span>(){ count++; }
+    <span class="kw">void</span> <span class="fn">decrement</span>(){ <span class="kw">if</span>(count &gt; <span class="nm">0</span>) count--; }
+    <span class="kw">int</span>  <span class="fn">get</span>()       { <span class="kw">return</span> count; }
+};
+<span class="kw">int</span> <span class="fn">main</span>(){
+    <span class="cl">Counter</span> c;
+    c.<span class="fn">increment</span>(); c.<span class="fn">increment</span>(); c.<span class="fn">increment</span>();
+    cout &lt;&lt; c.<span class="fn">get</span>() &lt;&lt; endl;
+    c.<span class="fn">decrement</span>();
+    cout &lt;&lt; c.<span class="fn">get</span>() &lt;&lt; endl;
+    c.<span class="fn">decrement</span>(); c.<span class="fn">decrement</span>(); c.<span class="fn">decrement</span>();
+    cout &lt;&lt; c.<span class="fn">get</span>() &lt;&lt; endl;
+}</pre>
+                <button class="answer-toggle" onclick="toggleOutput(this)">▶ Reveal Output</button>
+                <div class="output-expected">
+                    <h4>Expected Output</h4>
+                    <pre>3
+2
+0</pre>
+                </div>
+            </div>
+
+            <!-- O5 -->
+            <div class="section-label">
+                <div class="num" style="background:#f78c6c;">O5</div>
+                <h2>Static Members</h2>
+                <div class="marks">Theory Points</div>
+            </div>
+            <div class="q-card">
+                <div class="q-header">
+                    <div class="q-num">05</div>
+                    <div class="q-meta">
+                        <div class="q-topic">Static Members · Object Count</div>
+                        <div class="q-text">What is the output of the following program?</div>
+                    </div>
+                    <div class="q-marks">5 pts</div>
+                </div>
+                <pre><span class="kw">#include</span><span class="st">&lt;iostream&gt;</span>
+<span class="kw">using namespace</span> std;
+<span class="kw">class</span> <span class="cl">Obj</span> {
+    <span class="kw">static int</span> count;
+<span class="kw">public</span>:
+    <span class="fn">Obj</span>()  { count++; cout &lt;&lt; <span class="st">"Created: "</span> &lt;&lt; count &lt;&lt; <span class="st">"\n"</span>; }
+    ~<span class="fn">Obj</span>() { count--; cout &lt;&lt; <span class="st">"Destroyed: "</span> &lt;&lt; count &lt;&lt; <span class="st">"\n"</span>; }
+};
+<span class="kw">int</span> <span class="cl">Obj</span>::count = <span class="nm">0</span>;
+<span class="kw">int</span> <span class="fn">main</span>(){
+    <span class="cl">Obj</span> a;
+    <span class="cl">Obj</span> b;
+    {
+        <span class="cl">Obj</span> c;
+    }
+    cout &lt;&lt; <span class="st">"Still alive\n"</span>;
+}</pre>
+                <button class="answer-toggle" onclick="toggleOutput(this)">▶ Reveal Output</button>
+                <div class="output-expected">
+                    <h4>Expected Output</h4>
+                    <pre>Created: 1
+Created: 2
+Created: 3
+Destroyed: 2
+Still alive
+Destroyed: 1
+Destroyed: 0</pre>
+                </div>
+            </div>
+
+        </div><!-- /tab-output -->
+
+
+        <!-- ══════════════════════════════════ MCQ TAB ══════════════════════════════════ -->
+        <div id="tab-mcq" class="tab-content">
+
+            <div class="score-bar">
+                <div>
+                    <div class="score-val" id="score-display">0 / 25</div>
+                    <div class="score-label">Score — Select options and click Check Answers</div>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <button class="check-btn" onclick="checkAll()">Check Answers</button>
+            </div>
+
+            <div class="instructions">
+                <h3>📋 Instructions</h3>
+                <ul>
+                    <li>Each MCQ carries <strong>1 mark</strong>. No negative marking.</li>
+                    <li>Select one option per question, then click <strong>Check Answers</strong>.</li>
+                </ul>
+            </div>
+
+            <!-- MCQ 1 -->
+            <div class="q-card" id="mcq-1">
+                <div class="q-header">
+                    <div class="q-num">M1</div>
+                    <div class="q-meta">
+                        <div class="q-topic">Encapsulation</div>
+                        <div class="q-text">Which access specifier makes class members accessible only within the class
+                            itself?</div>
+                    </div>
+                    <div class="q-marks">Practice Point</div>
+                </div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="selectOpt(this, 1, 'A')" data-val="A"><span
+                            class="opt-letter">A</span> public</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 1, 'B')" data-val="B"><span
+                            class="opt-letter">B</span> protected</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 1, 'C')" data-val="C"><span
+                            class="opt-letter">C</span> private</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 1, 'D')" data-val="D"><span
+                            class="opt-letter">D</span> internal</div>
+                </div>
+            </div>
+
+            <!-- MCQ 2 -->
+            <div class="q-card" id="mcq-2">
+                <div class="q-header">
+                    <div class="q-num">M2</div>
+                    <div class="q-meta">
+                        <div class="q-topic">Inheritance</div>
+                        <div class="q-text">In C++, which keyword is used to prevent a method from being overridden in
+                            derived classes?</div>
+                    </div>
+                    <div class="q-marks">Practice Point</div>
+                </div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="selectOpt(this, 2, 'A')" data-val="A"><span
+                            class="opt-letter">A</span> abstract</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 2, 'B')" data-val="B"><span
+                            class="opt-letter">B</span> sealed</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 2, 'C')" data-val="C"><span
+                            class="opt-letter">C</span> final</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 2, 'D')" data-val="D"><span
+                            class="opt-letter">D</span> static</div>
+                </div>
+            </div>
+
+            <!-- MCQ 3 -->
+            <div class="q-card" id="mcq-3">
+                <div class="q-header">
+                    <div class="q-num">M3</div>
+                    <div class="q-meta">
+                        <div class="q-topic">Constructor</div>
+                        <div class="q-text">Which constructor is called when an object is initialized using another
+                            object of the same class?</div>
+                    </div>
+                    <div class="q-marks">Practice Point</div>
+                </div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="selectOpt(this, 3, 'A')" data-val="A"><span
+                            class="opt-letter">A</span> Default constructor</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 3, 'B')" data-val="B"><span
+                            class="opt-letter">B</span> Copy constructor</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 3, 'C')" data-val="C"><span
+                            class="opt-letter">C</span> Parameterized constructor</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 3, 'D')" data-val="D"><span
+                            class="opt-letter">D</span> Static constructor</div>
+                </div>
+            </div>
+
+            <!-- MCQ 4 -->
+            <div class="q-card" id="mcq-4">
+                <div class="q-header">
+                    <div class="q-num">M4</div>
+                    <div class="q-meta">
+                        <div class="q-topic">OOP Benefits</div>
+                        <div class="q-text">Which OOP feature allows a single interface to represent different
+                            underlying data types?</div>
+                    </div>
+                    <div class="q-marks">Practice Point</div>
+                </div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="selectOpt(this, 4, 'A')" data-val="A"><span
+                            class="opt-letter">A</span> Encapsulation</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 4, 'B')" data-val="B"><span
+                            class="opt-letter">B</span> Abstraction</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 4, 'C')" data-val="C"><span
+                            class="opt-letter">C</span> Inheritance</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 4, 'D')" data-val="D"><span
+                            class="opt-letter">D</span> Polymorphism</div>
+                </div>
+            </div>
+
+            <!-- MCQ 5 -->
+            <div class="q-card" id="mcq-5">
+                <div class="q-header">
+                    <div class="q-num">M5</div>
+                    <div class="q-meta">
+                        <div class="q-topic">Function Overloading</div>
+                        <div class="q-text">Function overloading is resolved at which stage in C++?</div>
+                    </div>
+                    <div class="q-marks">Practice Point</div>
+                </div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="selectOpt(this, 5, 'A')" data-val="A"><span class="opt-letter">A</span> Runtime</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 5, 'B')" data-val="B"><span class="opt-letter">B</span> Link time</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 5, 'C')" data-val="C"><span class="opt-letter">C</span> Compile time</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 5, 'D')" data-val="D"><span class="opt-letter">D</span> Load time</div>
+                </div>
+            </div>
+
+            <!-- MCQ 6 -->
+            <div class="q-card" id="mcq-6">
+                <div class="q-header">
+                    <div class="q-num">M6</div>
+                    <div class="q-meta">
+                        <div class="q-topic">Class</div>
+                        <div class="q-text">What is a class in OOP?</div>
+                    </div>
+                    <div class="q-marks">Practice Point</div>
+                </div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="selectOpt(this, 6, 'A')" data-val="A"><span class="opt-letter">A</span> A blueprint or template</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 6, 'B')" data-val="B"><span class="opt-letter">B</span> A variable</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 6, 'C')" data-val="C"><span class="opt-letter">C</span> A specific instance</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 6, 'D')" data-val="D"><span class="opt-letter">D</span> A function call</div>
+                </div>
+            </div>
+
+            <!-- MCQ 7 -->
+            <div class="q-card" id="mcq-7">
+                <div class="q-header">
+                    <div class="q-num">M7</div>
+                    <div class="q-meta">
+                        <div class="q-topic">Object</div>
+                        <div class="q-text">What is an object?</div>
+                    </div>
+                    <div class="q-marks">Practice Point</div>
+                </div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="selectOpt(this, 7, 'A')" data-val="A"><span class="opt-letter">A</span> A data type</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 7, 'B')" data-val="B"><span class="opt-letter">B</span> An instance of a class</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 7, 'C')" data-val="C"><span class="opt-letter">C</span> A compiler error</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 7, 'D')" data-val="D"><span class="opt-letter">D</span> A header file</div>
+                </div>
+            </div>
+
+            <!-- MCQ 8 -->
+            <div class="q-card" id="mcq-8">
+                <div class="q-header">
+                    <div class="q-num">M8</div>
+                    <div class="q-meta">
+                        <div class="q-topic">Inheritance</div>
+                        <div class="q-text">Which relationship is represented by inheritance?</div>
+                    </div>
+                    <div class="q-marks">Practice Point</div>
+                </div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="selectOpt(this, 8, 'A')" data-val="A"><span class="opt-letter">A</span> is-a relationship</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 8, 'B')" data-val="B"><span class="opt-letter">B</span> has-a relationship</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 8, 'C')" data-val="C"><span class="opt-letter">C</span> part-of relationship</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 8, 'D')" data-val="D"><span class="opt-letter">D</span> uses-a relationship</div>
+                </div>
+            </div>
+
+            <!-- MCQ 9 -->
+            <div class="q-card" id="mcq-9">
+                <div class="q-header">
+                    <div class="q-num">M9</div>
+                    <div class="q-meta">
+                        <div class="q-topic">OOP Benefits</div>
+                        <div class="q-text">Which of the following is NOT a benefit of OOP?</div>
+                    </div>
+                    <div class="q-marks">Practice Point</div>
+                </div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="selectOpt(this, 9, 'A')" data-val="A"><span class="opt-letter">A</span> Reusability</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 9, 'B')" data-val="B"><span class="opt-letter">B</span> Modularity</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 9, 'C')" data-val="C"><span class="opt-letter">C</span> Data Security</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 9, 'D')" data-val="D"><span class="opt-letter">D</span> Higher execution speed than procedural</div>
+                </div>
+            </div>
+
+            <!-- MCQ 10 -->
+            <div class="q-card" id="mcq-10">
+                <div class="q-header">
+                    <div class="q-num">M10</div>
+                    <div class="q-meta">
+                        <div class="q-topic">OOP Disadvantages</div>
+                        <div class="q-text">What is a common disadvantage of OOP?</div>
+                    </div>
+                    <div class="q-marks">Practice Point</div>
+                </div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="selectOpt(this, 10, 'A')" data-val="A"><span class="opt-letter">A</span> No data hiding</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 10, 'B')" data-val="B"><span class="opt-letter">B</span> Limited code reuse</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 10, 'C')" data-val="C"><span class="opt-letter">C</span> Memory and CPU overhead</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 10, 'D')" data-val="D"><span class="opt-letter">D</span> Small file size</div>
+                </div>
+            </div>
+
+            <!-- MCQ 11 -->
+            <div class="q-card" id="mcq-11">
+                <div class="q-header">
+                    <div class="q-num">M11</div>
+                    <div class="q-meta">
+                        <div class="q-topic">Inheritance</div>
+                        <div class="q-text">Which operator is used for inheritance in C++?</div>
+                    </div>
+                    <div class="q-marks">Practice Point</div>
+                </div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="selectOpt(this, 11, 'A')" data-val="A"><span class="opt-letter">A</span> ::</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 11, 'B')" data-val="B"><span class="opt-letter">B</span> :</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 11, 'C')" data-val="C"><span class="opt-letter">C</span> .</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 11, 'D')" data-val="D"><span class="opt-letter">D</span> -></div>
+                </div>
+            </div>
+
+            <!-- MCQ 12 -->
+            <div class="q-card" id="mcq-12">
+                <div class="q-header">
+                    <div class="q-num">M12</div>
+                    <div class="q-meta">
+                        <div class="q-topic">Constructor</div>
+                        <div class="q-text">Can a constructor be private?</div>
+                    </div>
+                    <div class="q-marks">Practice Point</div>
+                </div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="selectOpt(this, 12, 'A')" data-val="A"><span class="opt-letter">A</span> Yes, in certain design patterns</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 12, 'B')" data-val="B"><span class="opt-letter">B</span> No, never</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 12, 'C')" data-val="C"><span class="opt-letter">C</span> Only in single inheritance</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 12, 'D')" data-val="D"><span class="opt-letter">D</span> Only if it has no parameters</div>
+                </div>
+            </div>
+
+            <!-- MCQ 13 -->
+            <div class="q-card" id="mcq-13">
+                <div class="q-header">
+                    <div class="q-num">M13</div>
+                    <div class="q-meta">
+                        <div class="q-topic">Class</div>
+                        <div class="q-text">A static member of a class belongs to:</div>
+                    </div>
+                    <div class="q-marks">Practice Point</div>
+                </div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="selectOpt(this, 13, 'A')" data-val="A"><span class="opt-letter">A</span> Each object individually</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 13, 'B')" data-val="B"><span class="opt-letter">B</span> Only the first object created</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 13, 'C')" data-val="C"><span class="opt-letter">C</span> The class itself (shared by all objects)</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 13, 'D')" data-val="D"><span class="opt-letter">D</span> The main function</div>
+                </div>
+            </div>
+
+            <!-- MCQ 14 -->
+            <div class="q-card" id="mcq-14">
+                <div class="q-header">
+                    <div class="q-num">M14</div>
+                    <div class="q-meta">
+                        <div class="q-topic">Encapsulation</div>
+                        <div class="q-text">Encapsulation is primarily achieved using:</div>
+                    </div>
+                    <div class="q-marks">Practice Point</div>
+                </div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="selectOpt(this, 14, 'A')" data-val="A"><span class="opt-letter">A</span> Pointers</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 14, 'B')" data-val="B"><span class="opt-letter">B</span> Access specifiers (public, private)</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 14, 'C')" data-val="C"><span class="opt-letter">C</span> Global variables</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 14, 'D')" data-val="D"><span class="opt-letter">D</span> Loops</div>
+                </div>
+            </div>
+
+            <!-- MCQ 15 -->
+            <div class="q-card" id="mcq-15">
+                <div class="q-header">
+                    <div class="q-num">M15</div>
+                    <div class="q-meta">
+                        <div class="q-topic">Function Overloading</div>
+                        <div class="q-text">Function overloading requires functions to have:</div>
+                    </div>
+                    <div class="q-marks">Practice Point</div>
+                </div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="selectOpt(this, 15, 'A')" data-val="A"><span class="opt-letter">A</span> Different parameters (type or number)</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 15, 'B')" data-val="B"><span class="opt-letter">B</span> Different return types only</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 15, 'C')" data-val="C"><span class="opt-letter">C</span> Different names</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 15, 'D')" data-val="D"><span class="opt-letter">D</span> Same parameters</div>
+                </div>
+            </div>
+
+            <!-- MCQ 16 -->
+            <div class="q-card" id="mcq-16">
+                <div class="q-header">
+                    <div class="q-num">M16</div>
+                    <div class="q-meta">
+                        <div class="q-topic">Class</div>
+                        <div class="q-text">In C++, if no access specifier is mentioned, class members are:</div>
+                    </div>
+                    <div class="q-marks">Practice Point</div>
+                </div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="selectOpt(this, 16, 'A')" data-val="A"><span class="opt-letter">A</span> Public</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 16, 'B')" data-val="B"><span class="opt-letter">B</span> Private</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 16, 'C')" data-val="C"><span class="opt-letter">C</span> Protected</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 16, 'D')" data-val="D"><span class="opt-letter">D</span> Static</div>
+                </div>
+            </div>
+
+            <!-- MCQ 17 -->
+            <div class="q-card" id="mcq-17">
+                <div class="q-header">
+                    <div class="q-num">M17</div>
+                    <div class="q-meta">
+                        <div class="q-topic">Inheritance</div>
+                        <div class="q-text">Which keyword is used for inheritance in Java?</div>
+                    </div>
+                    <div class="q-marks">Practice Point</div>
+                </div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="selectOpt(this, 17, 'A')" data-val="A"><span class="opt-letter">A</span> inherits</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 17, 'B')" data-val="B"><span class="opt-letter">B</span> base</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 17, 'C')" data-val="C"><span class="opt-letter">C</span> extends</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 17, 'D')" data-val="D"><span class="opt-letter">D</span> derives</div>
+                </div>
+            </div>
+
+            <!-- MCQ 18 -->
+            <div class="q-card" id="mcq-18">
+                <div class="q-header">
+                    <div class="q-num">M18</div>
+                    <div class="q-meta">
+                        <div class="q-topic">Inheritance</div>
+                        <div class="q-text">A class containing at least one pure virtual function is:</div>
+                    </div>
+                    <div class="q-marks">Practice Point</div>
+                </div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="selectOpt(this, 18, 'A')" data-val="A"><span class="opt-letter">A</span> Concrete class</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 18, 'B')" data-val="B"><span class="opt-letter">B</span> Static class</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 18, 'C')" data-val="C"><span class="opt-letter">C</span> Sealed class</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 18, 'D')" data-val="D"><span class="opt-letter">D</span> Abstract class</div>
+                </div>
+            </div>
+
+            <!-- MCQ 19 -->
+            <div class="q-card" id="mcq-19">
+                <div class="q-header">
+                    <div class="q-num">M19</div>
+                    <div class="q-meta">
+                        <div class="q-topic">Benefits of OOP</div>
+                        <div class="q-text">Code reusability is mainly achieved through:</div>
+                    </div>
+                    <div class="q-marks">Practice Point</div>
+                </div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="selectOpt(this, 19, 'A')" data-val="A"><span class="opt-letter">A</span> Inheritance</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 19, 'B')" data-val="B"><span class="opt-letter">B</span> Overloading</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 19, 'C')" data-val="C"><span class="opt-letter">C</span> Recursion</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 19, 'D')" data-val="D"><span class="opt-letter">D</span> Loops</div>
+                </div>
+            </div>
+
+            <!-- MCQ 20 -->
+            <div class="q-card" id="mcq-20">
+                <div class="q-header">
+                    <div class="q-num">M20</div>
+                    <div class="q-meta">
+                        <div class="q-topic">OOP Basics</div>
+                        <div class="q-text">OOP focuses primarily on:</div>
+                    </div>
+                    <div class="q-marks">Practice Point</div>
+                </div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="selectOpt(this, 20, 'A')" data-val="A"><span class="opt-letter">A</span> Procedures</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 20, 'B')" data-val="B"><span class="opt-letter">B</span> Data and Objects</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 20, 'C')" data-val="C"><span class="opt-letter">C</span> Logical flow</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 20, 'D')" data-val="D"><span class="opt-letter">D</span> Hardware efficiency</div>
+                </div>
+            </div>
+
+            <!-- MCQ 21 -->
+            <div class="q-card" id="mcq-21">
+                <div class="q-header">
+                    <div class="q-num">M21</div>
+                    <div class="q-meta">
+                        <div class="q-topic">Encapsulation</div>
+                        <div class="q-text">Which of these is a benefit of encapsulation?</div>
+                    </div>
+                    <div class="q-marks">Practice Point</div>
+                </div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="selectOpt(this, 21, 'A')" data-val="A"><span class="opt-letter">A</span> Faster code execution</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 21, 'B')" data-val="B"><span class="opt-letter">B</span> Direct data access</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 21, 'C')" data-val="C"><span class="opt-letter">C</span> Data security and integrity</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 21, 'D')" data-val="D"><span class="opt-letter">D</span> Less memory usage</div>
+                </div>
+            </div>
+
+            <!-- MCQ 22 -->
+            <div class="q-card" id="mcq-22">
+                <div class="q-header">
+                    <div class="q-num">M22</div>
+                    <div class="q-meta">
+                        <div class="q-topic">Inheritance</div>
+                        <div class="q-text">Multiple inheritance means:</div>
+                    </div>
+                    <div class="q-marks">Practice Point</div>
+                </div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="selectOpt(this, 22, 'A')" data-val="A"><span class="opt-letter">A</span> One child class, many parent classes</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 22, 'B')" data-val="B"><span class="opt-letter">B</span> Many child classes, one parent class</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 22, 'C')" data-val="C"><span class="opt-letter">C</span> Inheritance across many levels</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 22, 'D')" data-val="D"><span class="opt-letter">D</span> No inheritance at all</div>
+                </div>
+            </div>
+
+            <!-- MCQ 23 -->
+            <div class="q-card" id="mcq-23">
+                <div class="q-header">
+                    <div class="q-num">M23</div>
+                    <div class="q-meta">
+                        <div class="q-topic">Constructor</div>
+                        <div class="q-text">What is the return type of a constructor?</div>
+                    </div>
+                    <div class="q-marks">Practice Point</div>
+                </div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="selectOpt(this, 23, 'A')" data-val="A"><span class="opt-letter">A</span> int</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 23, 'B')" data-val="B"><span class="opt-letter">B</span> void</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 23, 'C')" data-val="C"><span class="opt-letter">C</span> float</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 23, 'D')" data-val="D"><span class="opt-letter">D</span> None of the above</div>
+                </div>
+            </div>
+
+            <!-- MCQ 24 -->
+            <div class="q-card" id="mcq-24">
+                <div class="q-header">
+                    <div class="q-num">M24</div>
+                    <div class="q-meta">
+                        <div class="q-topic">Disadvantages of OOP</div>
+                        <div class="q-text">Which is a disadvantage of OOP?</div>
+                    </div>
+                    <div class="q-marks">Practice Point</div>
+                </div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="selectOpt(this, 24, 'A')" data-val="A"><span class="opt-letter">A</span> High reusability</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 24, 'B')" data-val="B"><span class="opt-letter">B</span> Increased complexity for simple tasks</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 24, 'C')" data-val="C"><span class="opt-letter">C</span> Better data security</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 24, 'D')" data-val="D"><span class="opt-letter">D</span> Easier maintenance</div>
+                </div>
+            </div>
+
+            <!-- MCQ 25 -->
+            <div class="q-card" id="mcq-25">
+                <div class="q-header">
+                    <div class="q-num">M25</div>
+                    <div class="q-meta">
+                        <div class="q-topic">OOP Basics</div>
+                        <div class="q-text">OOP stands for:</div>
+                    </div>
+                    <div class="q-marks">Practice Point</div>
+                </div>
+                <div class="mcq-options">
+                    <div class="mcq-opt" onclick="selectOpt(this, 25, 'A')" data-val="A"><span class="opt-letter">A</span> Object Oriented Programming</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 25, 'B')" data-val="B"><span class="opt-letter">B</span> Office Oriented Process</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 25, 'C')" data-val="C"><span class="opt-letter">C</span> Optimized Output Program</div>
+                    <div class="mcq-opt" onclick="selectOpt(this, 25, 'D')" data-val="D"><span class="opt-letter">D</span> Ordered Object Protocol</div>
+                </div>
+            </div>
+
+        </div><!-- /tab-mcq -->
+
+    </div><!-- /wrapper -->
+
+    <footer>
+        Prepared by Sir Bilal · Computer Science Department · OOP Preparation Portal &nbsp;·&nbsp; Best Wishes for Exams
+    </footer>
+
+    <script>
+        // Tab switching
+        function switchTab(name) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+            document.getElementById('tab-' + name).classList.add('active');
+            const idx = { long: 0, theory: 1, output: 2, mcq: 3 }[name];
+            document.querySelectorAll('nav button')[idx].classList.add('active');
+        }
+
+        // Toggle model answers
+        function toggleAnswer(btn) {
+            const box = btn.nextElementSibling;
+            const visible = box.classList.toggle('visible');
+            btn.textContent = visible ? '▼ Hide Answer' : '▶ Show Model Answer';
+        }
+
+        function toggleOutput(btn) {
+            const box = btn.nextElementSibling;
+            const visible = box.classList.toggle('visible');
+            btn.textContent = visible ? '▼ Hide Output' : '▶ Reveal Output';
+        }
+
+        // MCQ logic
+        const correctAnswers = { 
+            1: 'C', 2: 'C', 3: 'B', 4: 'D', 5: 'C',
+            6: 'A', 7: 'B', 8: 'A', 9: 'D', 10: 'C',
+            11: 'B', 12: 'A', 13: 'C', 14: 'B', 15: 'A',
+            16: 'B', 17: 'C', 18: 'D', 19: 'A', 20: 'B',
+            21: 'C', 22: 'A', 23: 'D', 24: 'B', 25: 'A'
+        };
+        const selections = {};
+
+        function selectOpt(el, qNum, val) {
+            const card = document.getElementById('mcq-' + qNum);
+            card.querySelectorAll('.mcq-opt').forEach(o => o.classList.remove('selected'));
+            el.classList.add('selected');
+            selections[qNum] = val;
+        }
+
+        function checkAll() {
+            let score = 0;
+            for (let q = 1; q <= 25; q++) {
+                const card = document.getElementById('mcq-' + q);
+                const chosen = selections[q];
+                const correct = correctAnswers[q];
+                card.querySelectorAll('.mcq-opt').forEach(opt => {
+                    opt.classList.remove('correct', 'wrong', 'selected');
+                    if (opt.dataset.val === correct) opt.classList.add('correct');
+                    else if (opt.dataset.val === chosen && chosen !== correct) opt.classList.add('wrong');
+                });
+                if (chosen === correct) score++;
+            }
+            document.getElementById('score-display').textContent = score + ' / 25';
+            document.getElementById('progress-fill').style.width = (score / 25 * 100) + '%';
+        }
+    </script>
+</body>
+
+</html>
